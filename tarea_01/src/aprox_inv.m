@@ -5,6 +5,7 @@
 % Parameters:
 %   input         matrix_a
 %                 tolerance
+%
 %   output        matrix_a_inv
 %
 % Developer:    Daniel Kohkemper
