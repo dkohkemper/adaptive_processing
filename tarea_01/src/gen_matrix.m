@@ -11,7 +11,7 @@
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019
 % *************************************************************************
-function matrix_str = gen_matrix(matrix_str, mat_size, ro, sigma_sqr)
+function matrix_str = gen_matrix(mat_size, ro, sigma_sqr)
 
     % Set X covariance matrix
     X_cov_mat = ones(mat_size, mat_size) * ro;
@@ -23,4 +23,6 @@ function matrix_str = gen_matrix(matrix_str, mat_size, ro, sigma_sqr)
     matrix_str.v_vector = (v_vector - mean(v_vector(:))) ./ var(v_vector(:));
     % Set matrix A
     matrix_str.mat_A = full(gallery('tridiag', mat_size, 1, 3, 1));
+    % Set observation matrix y
+    matrix_str.y_vector = randn(mat_size, 1);
 end

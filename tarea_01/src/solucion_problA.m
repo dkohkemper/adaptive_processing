@@ -27,26 +27,37 @@
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019
 % *************************************************************************
-function [matrix_k, error] = solucion_problA(matrix_str, mat_size, ro, sigma_sqr, tolerance)
+function [matrix_k, error] = solucion_problA(mat_size, ro, sigma_sqr, tolerance)
 
     % Init variables, to be deleted
-    matrix_k = [];
-    error    = [];    
-    mat_size  = mat_size;
-    ro        = ro;
-    sigma_sqr = sigma_sqr;
-    matrix_str = matrix_str;
+    error = [];    
     
+    % Generate matrixes to be used in the linear model solution
+    matrix_str = gen_matrix(mat_size, ro, sigma_sqr);
+
+    % Unfold struct variables
+    X_cov_mat = matrix_str.X_cov_mat;
+    V_cov_mat = matrix_str.V_cov_mat;
+    v_vector  = matrix_str.v_vector;
+    mat_A     = matrix_str.mat_A;
+    y_vector  = matrix_str.y_vector;
+
     % Check if tolerance is positive, else output error
     if (tolerance < 0)
         error("ERROR: Tolerance is negative.");
         return;
     end
+
+    % Calculate matrix_k
+    mat_1    = aprox_inv(X_cov_mat, tolerance);
+    mat_2    = cmplx_transp(mat_A) * aprox_inv(V_cov_mat, tolerance) * mat_A;
+    MMSE     = aprox_inv((mat_1 + mat_2), tolerance);
+    matrix_k = MMSE * cmplx_transp(mat_A) * aprox_inv(V_cov_mat, tolerance);
+
+    % Obtain estimate of x variable
+    x_estimate = matrix_k * y_vector;
     
-    % Use inverse matrix function in the calculations
-    % matrix_a_inv = aprox_inv(test_mat, tolerance)
-    
-    % TODO: Implement approximation -> output matrix_k
-    
-    % TODO: Calculate error -> output error
+    % Calculate error
+    mat_1 = x_estimate - matrix_k * y_vector;
+    error = (norm(mat_1))^2;
 end
