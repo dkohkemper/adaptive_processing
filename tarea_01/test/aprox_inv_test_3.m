@@ -36,9 +36,8 @@ for idx_rho = 1 : length(rho)
     error_mat(idx_rho) = error;
 end
 
-figure;
+figure(3);
 stem(rho, error_mat);
-ylim([0 5])
 xlabel("Param \rho");
 ylabel("General error e_k");
 title("Test 3: Param \rho vs general error e_k")

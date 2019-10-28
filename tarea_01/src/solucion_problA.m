@@ -27,11 +27,8 @@
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019
 % *************************************************************************
-function [matrix_k, error] = solucion_problA(mat_size, ro, sigma_sqr, tolerance)
+function [matrix_k, error_k] = solucion_problA(mat_size, ro, sigma_sqr, tolerance)
 
-    % Init variables, to be deleted
-    error = [];    
-    
     % Generate matrixes to be used in the linear model solution
     matrix_str = gen_matrix(mat_size, ro, sigma_sqr);
 
@@ -55,8 +52,9 @@ function [matrix_k, error] = solucion_problA(mat_size, ro, sigma_sqr, tolerance)
 
     % Obtain estimate of x variable
     x_estimate = matrix_k * y_vector;
-    
+
+    % Calculate Ryy
+    Y_cov_mat = mat_A * X_cov_mat * cmplx_transp(mat_A) + V_cov_mat;    
     % Calculate error
-    mat_1 = x_estimate - matrix_k * y_vector;
-    error = (norm(mat_1))^2;
+    error_k = trace(X_cov_mat - matrix_k * Y_cov_mat * cmplx_transp(matrix_k));
 end

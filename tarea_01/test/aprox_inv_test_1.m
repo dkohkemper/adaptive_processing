@@ -33,9 +33,8 @@ for idx_dim = 1 : length(mat_size)
     error_mat(idx_dim) = error;
 end
 
-figure;
+figure(1);
 stem(mat_size, error_mat);
-ylim([0 5])
 xlabel("Dimension m");
 ylabel("General error e_k");
 title("Test 1: Dimension m vs general error e_k")

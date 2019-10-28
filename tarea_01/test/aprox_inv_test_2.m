@@ -33,9 +33,8 @@ for idx_sigma = 1 : length(sigma_sqr)
     error_mat(idx_sigma) = error;
 end
 
-figure;
+figure(2);
 stem(sigma_sqr, error_mat);
-ylim([0 5])
 xlabel("Std Dev \sigma");
 ylabel("General error e_k");
 title("Test 2: Std Dev \sigma vs general error e_k")
