@@ -21,7 +21,7 @@ fprintf('Simulation start\n');
 mat_size  = 50;
 rho       = (0.01 : 0.01 : 0.99);
 sigma_sqr = 1;
-tolerance = 10^-4;
+tolerance = 10^-2;
 
 error_mat = NaN(1, length(rho));
 

@@ -18,8 +18,28 @@ function matrix_a_inv = aprox_inv(matrix_a, tolerance)
         error("ERROR: Tolerance is negative.");
         return;
     end
-
-    % Calculate matrix inverse
-    % TODO: Implement algorithm
-    matrix_a_inv = inv(matrix_a);
+    
+    % Generate identity matrix size m
+    ident_mat = eye(length(matrix_a));
+    % Calculate upper limit of alpha
+    upper_lim = 2 / norm(matrix_a)^2;
+    % Calculate alpha using a random number and upper limit
+    alpha = upper_lim * rand;
+    % Calculate first approximation
+    V_0 = alpha * cmplx_transp(matrix_a);
+    % Calculate error
+    error_k = frob_norm(matrix_a * V_0 - ident_mat);
+    % Assing first approximation to V_q
+    V_q = V_0;
+    % Iterate to find the approximation given the tolerance
+    while (error_k > tolerance)
+        % Calculate next V_q
+        V_q_next = V_q * (3 * ident_mat - 3 * matrix_a * V_q + (matrix_a * V_q)^2);
+        % Update V_q
+        V_q = V_q_next;
+        % Get error of approximation
+        error_k = frob_norm(matrix_a * V_q_next - ident_mat);
+    end
+    % Output matrix inverse approximation
+    matrix_a_inv = V_q_next;
 end

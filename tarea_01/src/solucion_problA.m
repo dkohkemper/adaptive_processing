@@ -38,7 +38,6 @@ function [matrix_k, error] = solucion_problA(mat_size, ro, sigma_sqr, tolerance)
     % Unfold struct variables
     X_cov_mat = matrix_str.X_cov_mat;
     V_cov_mat = matrix_str.V_cov_mat;
-    v_vector  = matrix_str.v_vector;
     mat_A     = matrix_str.mat_A;
     y_vector  = matrix_str.y_vector;
 

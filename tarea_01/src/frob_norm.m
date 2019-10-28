@@ -14,9 +14,7 @@
 % Date:         October, 2019
 % *************************************************************************
 function output_mat = frob_norm (input_mat)
-
     mat_1 = input_mat * cmplx_transp(input_mat);
-    mat_2 = trace(mat_1);
-    
+    mat_2 = trace(mat_1);    
     output_mat = sqrt(mat_2);
 end
