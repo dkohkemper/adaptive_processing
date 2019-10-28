@@ -1,18 +1,9 @@
-% Generates diverse matrixes to be used in the solution of a linear model
-%
-% Parameters:
-%   input         matrix_str
-%                 mat_size
-%                 ro
-%                 sigma_sqr
-%
-%   output        matrix_str
+% GEN_MATRIX Generates diverse matrixes to be used in the solution of a linear model
 %
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019
 % *************************************************************************
 function matrix_str = gen_matrix(mat_size, ro, sigma_sqr)
-
     % Set X covariance matrix
     X_cov_mat = ones(mat_size, mat_size) * ro;
     matrix_str.X_cov_mat = X_cov_mat - diag(diag(X_cov_mat)) + eye(mat_size, mat_size);

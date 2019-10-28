@@ -1,11 +1,10 @@
-% Testbench to obtain the LMS estimator of x given y
-% Test 2
-%   rho = 0.5
-%   m   = 25
-%   tol = 10^-4
-%   sigma belongs to [0.1, 5]
-%
-%   Plot dimension m vs general error e_k
+% *************************************************************************
+% TEST 2: Solves linear model y=Hx+v and plots
+%         std dev vs general error e_k
+%         rho = 0.5
+%         m   = 25
+%         tol = 10^-4
+%         sigma belongs to [0.1, 5]
 %
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019

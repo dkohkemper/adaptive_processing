@@ -1,28 +1,16 @@
-% Solve a linear model
-% Given a random vector x wich belongs to R^{m} with zero mean E[x] = 0_m and covariance matrix
-% R_{xx} which belongs to R^{m x m} given by a constant covariance matrix with parameter ro which
-% belongs to ]0,1[. Consider an observation vector y = Ax + n, where A belongs to R^{m x m} and it is
-% a tridiagonal matrix and n is a random vector which belongs to R^{m} and has zero mean E[n] = 0_m and
-% covariance matrix R_vv = sigma_sqr I_m, with I_m being the identity matrix of m-th order.
-% Vectors x and n are orthogonal.
-% Calculate the linear estimator of x given y.
+% SOLUCION_PROBLA Solves a linear model y = Hx+v
+%   [K, E_k] = SOLUCION_PROBLA(A_SIZE, RHO, VAR, TOL) Given the values of
+%   of matrix size A_SIZE, rho value RHO, variance VAR and tolerance TOL,
+%   solves the optimum K vector that minimizes the general error
 %
-% The LMS linear estimator of x given y may be evaluated with the following two expressions:
+%   The LMS linear estimator of x given y may be evaluated with the following
+%   two expressions:
 %
-% hat_{x} = R_x H* [R_v + H R_x H*]^{-1} y
+%   hat_{x} = R_x H* [R_v + H R_x H*]^{-1} y
 %
-% hat_{x} = [(R_x)^{-1} + H* (R_v)^{-1} H]^{-1} H* (R_v)^{-1} y
+%   hat_{x} = [(R_x)^{-1} + H* (R_v)^{-1} H]^{-1} H* (R_v)^{-1} y
 %
-% where MMSE = [(R_x)^{-1} + H* (R_v)^{-1} H]^{-1}
-% 
-% Parameters:
-%   input         mat_size
-%                 ro
-%                 sigma_sqr
-%                 tolerance
-%
-%   output        matrix_k
-%                 error
+%   where MMSE = [(R_x)^{-1} + H* (R_v)^{-1} H]^{-1}
 %
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019

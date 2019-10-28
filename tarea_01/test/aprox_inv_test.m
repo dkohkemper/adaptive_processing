@@ -1,4 +1,5 @@
-% Testbench to test approximation of inverse of matrix
+% *************************************************************************
+% TEST: Compares output of Matlab INV() function and APROX_INV().
 %
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019

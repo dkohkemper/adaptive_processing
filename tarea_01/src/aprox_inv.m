@@ -1,12 +1,10 @@
-% Calculate the inverse of a matrix
-% Algoritm obtained from "A family of iterative methods for computing the approximate inverse of a
-% square matrix and inner inverse of a non-square matrix"
-% Given an input matrix A, the inverse X is calculated using the condition ||AX^(k) - I_m|| < tol
-% Parameters:
-%   input         matrix_a
-%                 tolerance
+% APROX_INV Approximate inverse of matrix
+%   X = APROX_INV(A, TOL) approximates inverse X of matrix A with tolerance TOL
 %
-%   output        matrix_a_inv
+%   Algoritm obtained from "A family of iterative methods for computing the approximate
+%   inverse of a square matrix and inner inverse of a non-square matrix"
+%   Given an input matrix A, the inverse X is calculated using the condition
+%   ||AX^(k) - I_m|| < TOL
 %
 % Developer:    Daniel Kohkemper
 % Date:         October, 2019
