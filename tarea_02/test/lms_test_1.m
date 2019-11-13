@@ -9,8 +9,8 @@ addpath 'src';
 fprintf('Simulation start\n');
 
 % Set constants
-d_var      = [];
-u_vec      = [];
+d_var      = csvread("../input/d.text");
+u_vec      = csvread("../input/U.text");
 w_init_vec = [];
 tol        = 0;
 iter_max   = 0;
