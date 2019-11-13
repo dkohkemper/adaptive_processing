@@ -23,6 +23,14 @@ function [idx_k, w_vector, error, min_val] = lms_2_var_step(d_var, u_vec, w_init
     tol        = tol;
     iter_max   = iter_max;
     
+    % TEST: Inspect size and data type of random variable samples 'd'
+    s = length(d_var);
+    fprintf('TEST: random variable d_var: size (1x%d) and type info %s\n', s, typeinfo(d_var));
+
+    % TEST: Inspect size and data type of random vector samples 'u' (matrix 'U')
+    [s, n] = size(u_vec);
+    fprintf('TEST: random vector u_vec: size (%dx%d) and type info %s\n', s, n, typeinfo(u_vec));
+
     % TIP: Use \mhu_i = \frac{2}{1+i} in each iteration. Should any other value be used,
     % it should be justified.
     

@@ -23,6 +23,14 @@ function [idx_k, w_vector, error, min_val] = lms_10_gauss_newton(d_var, u_vec, w
     tol        = tol;
     iter_max   = iter_max;
     
+    % TEST: Inspect size and data type of random variable samples 'd'
+    s = length(d_var);
+    fprintf('TEST: random variable d_var: size (1x%d) and type info %s\n', s, typeinfo(d_var));
+
+    % TEST: Inspect size and data type of random vector samples 'u' (matrix 'U')
+    [s, n] = size(u_vec);
+    fprintf('TEST: random vector u_vec: size (%dx%d) and type info %s\n', s, n, typeinfo(u_vec));
+
     % TIP: Use (||w^{k} - w^{k-1}||_2 < tol) or (idx_k == iter_max) to stop algorithm
     
     % TODO:
