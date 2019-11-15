@@ -14,22 +14,29 @@
 %   min_val:  approximated minimum value
 %
 % *************************************************************************
-function [idx_k, w_vector, error, min_val] = lms_1_const_step(d_var, u_vec, w_init_vec, tol, iter_max)
+function [idx_k, w_vector, error, min_val] = lms_1_const_step(d_var, u_vec, w_init_vec, mu, tol, iter_max)
     
     % TODO: Delete, put here just to avoid messages 
-    d_var      = d_var;
-    u_vec      = u_vec;
-    w_init_vec = w_init_vec;
-    tol        = tol;
-    iter_max   = iter_max;
+    tol   = tol;
+    error = [];
     
-    % TEST: Inspect size and data type of random variable samples 'd'
-    s = length(d_var);
-    fprintf('TEST: random variable d_var: size (1x%d) and type info %s\n', s, typeinfo(d_var));
+    % Init w_vector
+    w_vector = w_init_vec;
 
-    % TEST: Inspect size and data type of random vector samples 'u' (matrix 'U')
-    [s, n] = size(u_vec);
-    fprintf('TEST: random vector u_vec: size (%dx%d) and type info %s\n', s, n, typeinfo(u_vec));
+    for idx_k = 1 : length(d_var)
+        w_next = w_vector + mu * transp(u_vec(idx_k, :)) * (d_var(idx_k) - u_vec(idx_k, :) * w_vector);
+
+        % Calculate error
+        error = [error, norm(w_next - w_vector)^2];
+
+        % Update w vector value
+        w_vector = w_next;
+
+        % Break loop if max iteration number is reached
+        if(idx_k == iter_max)
+            break
+        end
+    end
 
     % TIP: Use (||w^{k} - w^{k-1}||_2 < tol) or (idx_k == iter_max) to stop algorithm
     
@@ -38,8 +45,5 @@ function [idx_k, w_vector, error, min_val] = lms_1_const_step(d_var, u_vec, w_in
     % Calculate min value
     
     % Output variables
-    idx_k    = 0;
-    w_vector = [];
-    error    = 0;
     min_val  = 0;
 end
