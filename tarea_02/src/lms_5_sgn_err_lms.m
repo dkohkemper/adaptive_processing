@@ -23,8 +23,10 @@ function [idx_k, w_vector, error_vec, min_val_vec] = lms_5_sgn_err_lms(d_var, u_
     w_vector = w_init;
 
     for idx_k = 1 : length(d_var)
+        % Calculate estimation error
+        e_i = (d_var(idx_k) - u_vec(idx_k, :) * w_vector);
         % Calculate w vector
-        w_next = w_vector + mu * ctranspose(u_vec(idx_k, :)) * sign(d_var(idx_k) - u_vec(idx_k, :) * w_vector);
+        w_next = w_vector + mu * ctranspose(u_vec(idx_k, :)) * sign(e_i);
         % Calculate error e_{k} = ||w^{k} - w^{k-1}||_2
         error_vec = [error_vec, norm(w_next - w_vector)];
         % Calculate min_value

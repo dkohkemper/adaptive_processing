@@ -22,9 +22,11 @@ function [idx_k, w_vector, error_vec, min_val_vec] = lms_2_var_step(d_var, u_vec
     w_vector = w_init;
 
     for idx_k = 1 : length(d_var)
+        % Calculate estimation error
+        e_i = (d_var(idx_k) - u_vec(idx_k, :) * w_vector);
         mu_i = 2 / (1 + idx_k);
         % Calculate w vector
-        w_next = w_vector + mu_i * ctranspose(u_vec(idx_k, :)) * (d_var(idx_k) - u_vec(idx_k, :) * w_vector);
+        w_next = w_vector + mu_i * ctranspose(u_vec(idx_k, :)) * e_i;
         % Calculate error e_{k} = ||w^{k} - w^{k-1}||_2
         error_vec = [error_vec, norm(w_next - w_vector)];
         % Calculate min_value
