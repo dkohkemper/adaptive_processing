@@ -1,5 +1,5 @@
 % LMS_1_CONST_STEP 
-%   [K, W_VEC] = lms_1_const_step(D_VAR, U_VEC, W_INIT, TOL, ITER_MAX) solves problem
+%   [K, W_VEC] = lms_1_const_step(D_VAR, U_VEC, W_INIT, MU, TOL, ITER_MAX) solves problem
 %   min_{w}E[|d-uw|^{2}]
 %   
 %   d_var:    random variable
