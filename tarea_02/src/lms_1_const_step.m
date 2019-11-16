@@ -5,45 +5,49 @@
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
+%   mu:       mu constant
 %   tol:      tolerance
 %   iter_max: max number of iterations
 %
-%   idx_k:    number of iterations achieved
-%   w_vector: constant column vector size nx1
-%   error:    approximation error
-%   min_val:  approximated minimum value
+%   idx_k:        number of iterations achieved
+%   w_vector:     constant column vector size nx1
+%   error_vec:    approximation error
+%   min_val_vec:  approximated minimum value
 %
 % *************************************************************************
-function [idx_k, w_vector, error, min_val] = lms_1_const_step(d_var, u_vec, w_init_vec, mu, tol, iter_max)
-    
-    % TODO: Delete, put here just to avoid messages 
-    tol   = tol;
-    error = [];
-    
+function [idx_k, w_vector, error_vec, min_val_vec] = lms_1_const_step(d_var, u_vec, w_init, mu, tol, iter_max)
+    % Declare output vectors
+    error_vec   = [];
+    min_val_vec = [];
     % Init w_vector
-    w_vector = w_init_vec;
+    w_vector = w_init;
 
     for idx_k = 1 : length(d_var)
-        w_next = w_vector + mu * transp(u_vec(idx_k, :)) * (d_var(idx_k) - u_vec(idx_k, :) * w_vector);
-
-        % Calculate error
-        error = [error, norm(w_next - w_vector)^2];
+        % Calculate w vector
+        w_next = w_vector + mu * ctranspose(u_vec(idx_k, :)) * (d_var(idx_k) - u_vec(idx_k, :) * w_vector);
+        % Calculate error e_{k} = ||w^{k} - w^{k-1}||_2
+        error_vec = [error_vec, norm(w_next - w_vector)];
+        % Calculate min_value
+        R_dk_dk = d_var(idx_k) * ctranspose(d_var(idx_k));
+        R_dk_uk = d_var(idx_k) * ctranspose(u_vec(idx_k, :));
+        R_uk_uk = ctranspose(u_vec(idx_k, :)) * u_vec(idx_k, :);
+        min_val = R_dk_dk - ...
+                  ctranspose(R_dk_uk)  * w_vector - ...
+                  ctranspose(w_vector) * R_dk_uk + ...
+                  ctranspose(w_vector) * R_uk_uk * w_vector;
+        % Append min_val to output vector
+        min_val_vec = [min_val_vec, min_val];
 
         % Update w vector value
         w_vector = w_next;
 
+        % Break if tolerance is reached (||w^{k} - w^{k-1}||_2 < tol)
+        if(error_vec(end) < tol)
+            break;
+        end
         % Break loop if max iteration number is reached
         if(idx_k == iter_max)
             break
         end
     end
-
-    % TIP: Use (||w^{k} - w^{k-1}||_2 < tol) or (idx_k == iter_max) to stop algorithm
-    
-    % TODO:
-    % Calculate error: e_{k} = ||w^{k} - w^{k-1}||_2
-    % Calculate min value
-    
-    % Output variables
-    min_val  = 0;
 end

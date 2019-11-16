@@ -12,22 +12,22 @@ fprintf('Simulation start\n');
 d_var      = csvread("input/d.text");
 u_vec      = csvread("input/U.text");
 w_init_vec = zeros(size(u_vec, 2),1);
-tol        = 0.01;
-iter_max   = 3000;
-mu         = 0.001;
+tol        = 10^-6;
+iter_max   = size(u_vec, 1);
+mu         = 0.01;
 
-[idx_k, w_vector, error, min_val] = lms_1_const_step(d_var, u_vec, w_init_vec, mu, tol, iter_max);
+[idx_k, w_vector, error_vec, min_val_vec] = lms_1_const_step(d_var, u_vec, w_init_vec, mu, tol, iter_max);
 
 figure(1);
-plot((1 : idx_k), error);
+plot((1 : idx_k), error_vec);
 xlabel("Iterarations");
 ylabel("Error e_k");
-title("Test 1:Iterations vs general error e_k")
-% 
-% figure(2);
-% stem(idx_k, min_val);
-% xlabel("Iterarations");
-% ylabel("Min value");
-% title("Test 1:Iterations vs minimun value")
+title("Test 1: General error e_k vs Iterations")
+
+figure(2);
+plot((1 : idx_k), min_val_vec);
+xlabel("Iterarations");
+ylabel("Min value");
+title("Test 1: Minimun value vs Iterations")
 
 fprintf('Simulation end\n');
