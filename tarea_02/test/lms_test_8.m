@@ -11,13 +11,14 @@ fprintf('Simulation start\n');
 % Set constants
 d_var      = csvread("input/d.text");
 u_vec      = csvread("input/U.text");
-w_init_vec = zeros(size(u_vec, 2),1);
+c_init_vec = zeros(size(u_vec, 2),1); % FIR Channel
 tol        = 10^-6;
 iter_max   = size(u_vec, 1);
 mu         = 0.0001;
 delta      = 0.5;
 
-[idx_k, w_vector, error_vec, min_val_vec] = lms_8_lmmn(d_var, u_vec, w_init_vec, mu, delta, tol, iter_max);
+[idx_k, c_vector, error_vec, min_val_vec] = lms_8_lmmn(d_var, u_vec, c_init_vec, mu, delta, tol, iter_max);
+csvwrite("results/test_8_c_aprox.csv", c_vector);
 
 figure(1);
 plot((1 : idx_k), error_vec);
