@@ -5,7 +5,7 @@
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
-%   mu:       mu constant
+%   mu:       step-size constant
 %   tol:      tolerance
 %   iter_max: max number of iterations
 %

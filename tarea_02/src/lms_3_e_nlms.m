@@ -5,8 +5,8 @@
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
-%   mu:       mu constant
-%   epsilon:  epsilon constan
+%   mu:       step-size constant
+%   epsilon:  regularizaton parameter
 %   tol:      tolerance
 %   iter_max: max number of iterations
 %

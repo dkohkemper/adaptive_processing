@@ -6,9 +6,9 @@
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
 %   alpha:    alpha small factor (0 < alpha < 0.1)
-%   epsilon:  a-priori error
+%   epsilon:  regularizaton parameter
 %   lambda:   forgetting factor
-%   mu:       mu constant
+%   mu:       step-size constant
 %   tol:      tolerance
 %   iter_max: max number of iterations
 %

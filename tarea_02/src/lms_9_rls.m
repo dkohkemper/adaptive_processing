@@ -5,7 +5,7 @@
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
-%   epsilon:  a-priori error
+%   epsilon:  regularizaton parameter
 %   lambda:   forgetting factor
 %   tol:      tolerance
 %   iter_max: max number of iterations
