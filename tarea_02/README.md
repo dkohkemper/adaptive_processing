@@ -266,13 +266,12 @@ Simulation end
 
 
 ### Inciso b
-
 La siguiente tabla resume los valores obtenidos de las principales métricas para cada uno de los algoritmos, sumado con las [gráficas](results/plots/) que evidencian tales resultados, los cuales permiten determinar que el método iterativo que genera una mejor aproximación del canal FIR
-corresponde al algoritmo **LMS error-signo**, puesto que el valor del k-ésimo error equivale a 0 y el valor mínimo computado es prácticamente 0 con un orden de magnitud de -14, a costa de unas 5533 iteraciones. Sin embargo, cabe destacar que la implementación del **RLS** presenta un buen rendimiento computacional ya que requiere de aproxidamente 400 iteraciones, para realizar una estimación aceptable del vector C.
+corresponde al algoritmo **LMS error-signo**, puesto que el valor del k-ésimo error equivale a 0 y el valor mínimo computado es prácticamente 0 con un orden de magnitud de -14, a costa de unas 5533 iteraciones. De la misma forma, el **Least-mean-fourth (LMF)** produce valores muy pequeños, pero luego de unas 75 mil iteraciones, siendo computacionalmente más costoso. Adicionalmente, cabe destacar que la implementación del **RLS** presenta un buen rendimiento computacional ya que requiere de aproxidamente 400 iteraciones, para realizar una estimación aceptable del vector C, con un k-ésimo error y un valor mínimo cuyos órdenes de magnitud equivalen a -6 y -7 respetivamente.
 
 ##### Tabla 2.2.  Medidas asociadas a los algoritmos de gradiente estocástico.
 
-| Algoritmo                          |   k-iter   |     k-error     |      min      |
+| Algoritmo                          |   k-iter   |     k-error     |    val min    |
 | ---------------------------------- | ---------- | --------------- | ------------- |
 | LMS con paso constante             |     813    |   8.60515e-06   |  2.96194e-07  |
 | LMS con paso variable en el tiempo |     857    |   9.44600e-06   |  1.64214e-06  |
@@ -306,7 +305,5 @@ C = |     3    |
 Debido a que, como fue posible observar en el inciso anterior, estos valores del vector C son números racionales, donde efecutando una aproximación entera (*Nota: aprox. de 32 bits a nivel de Matlab/Octave*) a dicho vector, es posible notar por simple inspeción que los valores son iguales para los diez algoritmos implementados en el Ejercicio 1, deduciendo así un valor exacto para el vector C.
 
 
-
 ## Referencias
-
 * *Sayed, A. H. (2003). Fundamentals of adaptive filtering. John Wiley & Sons.*
