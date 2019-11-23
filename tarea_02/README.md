@@ -267,7 +267,9 @@ Simulation end
 
 ### Inciso b
 La siguiente tabla resume los valores obtenidos de las principales métricas para cada uno de los algoritmos, sumado con las [gráficas](results/plots/) que evidencian tales resultados, los cuales permiten determinar que el método iterativo que genera una mejor aproximación del canal FIR
-corresponde al algoritmo **LMS error-signo**, puesto que el valor del k-ésimo error equivale a 0 y el valor mínimo computado es prácticamente 0 con un orden de magnitud de -14, a costa de unas 5533 iteraciones. De la misma forma, el **Least-mean-fourth (LMF)** produce valores muy pequeños, pero luego de unas 75 mil iteraciones, siendo computacionalmente más costoso. Adicionalmente, cabe destacar que la implementación del **RLS** presenta un buen rendimiento computacional ya que requiere de aproxidamente 400 iteraciones, para realizar una estimación aceptable del vector C, con un k-ésimo error y un valor mínimo cuyos órdenes de magnitud equivalen a -6 y -7 respetivamente.
+corresponde al algoritmo **LMS error-signo**, puesto que el valor del k-ésimo error equivale a 0 y el valor mínimo computado es prácticamente 0 con un orden de magnitud de -14, a costa de unas 5533 iteraciones.
+
+De la misma forma, el **Least-mean-fourth (LMF)** produce valores muy pequeños, pero luego de unas 75 mil iteraciones, siendo computacionalmente más costoso. Adicionalmente, cabe destacar que la implementación del **RLS** presenta un buen rendimiento computacional ya que requiere de aproxidamente 400 iteraciones, para realizar una estimación aceptable del vector C, con un k-ésimo error y un valor mínimo cuyos órdenes de magnitud equivalen a -6 y -7 respetivamente.
 
 ##### Tabla 2.2.  Medidas asociadas a los algoritmos de gradiente estocástico.
 

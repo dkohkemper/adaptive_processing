@@ -40,7 +40,7 @@ plot((1 : idx_k), min_val_vec);
 xlabel("Iterarations");
 ylabel("Min value");
 title("Test 1: Minimun value vs Iterations")
-print(1, "results/plots/test_1_ek.pdf");
+print(2, "results/plots/test_1_min.pdf");
 
 fprintf('Simulation end\n');
 
