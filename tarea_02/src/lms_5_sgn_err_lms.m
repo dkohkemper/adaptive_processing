@@ -28,7 +28,8 @@ function [idx_k, w_vector, error_vec, min_val_vec] = lms_5_sgn_err_lms(d_var, u_
         % Calculate w vector
         w_next = w_vector + mu * ctranspose(u_vec(idx_k, :)) * sign(e_i);
         % Calculate error e_{k} = ||w^{k} - w^{k-1}||_2
-        error_vec = [error_vec, norm(w_next - w_vector)];
+        error_val   = norm(w_next - w_vector);
+        error_vec = [error_vec, error_val];
         % Calculate min_value
         R_dk_dk = d_var(idx_k) * ctranspose(d_var(idx_k));
         R_dk_uk = d_var(idx_k) * ctranspose(u_vec(idx_k, :));
@@ -45,10 +46,18 @@ function [idx_k, w_vector, error_vec, min_val_vec] = lms_5_sgn_err_lms(d_var, u_
 
         % Break if tolerance is reached (||w^{k} - w^{k-1}||_2 < tol)
         if(error_vec(end) < tol)
+            fprintf('Tolerance reached (error=%d < tol=%d)\n', error_val, tol);
+            fprintf('Num of iterations: %d\n', idx_k);
+            fprintf('Min value: %d\n', min_val);
+            w_vector
             break;
         end
         % Break loop if max iteration number is reached
         if(idx_k == iter_max)
+            fprintf('Max iterations reached (%d = %d)\n', idx_k, iter_max);
+            fprintf('Min value: %d\n', min_val);
+            fprintf('Error: %d\n', error_val);
+            w_vector
             break
         end
     end

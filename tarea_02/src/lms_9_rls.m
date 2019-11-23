@@ -59,10 +59,18 @@ function [idx_k, w_vector, error_vec, min_val_vec] = lms_9_rls(d_var, u_vec, w_i
 
         % Break if tolerance is reached (||w^{k} - w^{k-1}||_2 < tol)
         if(error_vec(end) < tol)
+            fprintf('Tolerance reached (error=%d < tol=%d)\n', error_val, tol);
+            fprintf('Num of iterations: %d\n', idx_k);
+            fprintf('Min value: %d\n', min_val);
+            w_vector
             break;
         end
         % Break loop if max iteration number is reached
         if(idx_k == iter_max)
+            fprintf('Max iterations reached (%d = %d)\n', idx_k, iter_max);
+            fprintf('Min value: %d\n', min_val);
+            fprintf('Error: %d\n', error_val);
+            w_vector
             break
         end
     end
