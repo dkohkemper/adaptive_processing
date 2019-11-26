@@ -16,19 +16,19 @@ tol        = 1e-05;
 iter_max   = size(u_vec, 1); % s=100000
 epsilon    = 1e-15;
 lambda     = 1;
-fprintf('  tol    = %d\n', tol);
-fprintf('iter_max = %d\n', iter_max);
-fprintf(' epsilon = %d\n', epsilon);
-fprintf('  lambda = %d\n...\n', lambda);
+fprintf(' tol      = %d\n', tol);
+fprintf(' iter_max = %d\n', iter_max);
+fprintf(' epsilon  = %d\n', epsilon);
+fprintf(' lambda   = %d\n...\n', lambda);
 
 % Exercise 1
 [idx_k, c_vector, error_vec, min_val_vec] = lms_9_rls(d_var, u_vec, c_init_vec, epsilon, lambda, tol, iter_max);
 
 % Exercise 2
-%% Subsection a
+% Subsection a
 csvwrite("results/c_estimation/test_9_c_aprox.csv", c_vector);
 
-%% Subsection b
+% Subsection b
 figure(1);
 plot((1 : idx_k), error_vec);
 xlabel("Iterarations");
@@ -45,5 +45,5 @@ print(2, "results/plots/test_9_min.pdf");
 
 fprintf('Simulation end\n');
 
-%% Subsection c
+% Subsection c
 csvwrite("results/int_c_estimation/test_9_int_c_aprox.csv", int32(c_vector));
