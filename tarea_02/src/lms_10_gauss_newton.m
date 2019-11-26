@@ -1,7 +1,7 @@
 % LMS_10_GAUSS_NEWTON
 %   [K, W_VEC] = lms_10_gauss_newton(D_VAR, U_VEC, W_INIT, TOL, ITER_MAX) solves problem
 %   min_{w}E[|d-uw|^{2}]
-%   
+%
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
@@ -17,6 +17,9 @@
 %   error_vec:    approximation error
 %   min_val_vec:  approximated minimum value
 %
+% Developers:   Daniel Kohkemper, Costa Rica Institute of Technology
+%               Fabricio Quirós,  Ridgerun
+% Date:         November, 2019
 % *************************************************************************
 function [idx_k, w_vector, error_vec, min_val_vec] = lms_10_gauss_newton(d_var, u_vec, w_init, alpha, epsilon, lambda, mu, tol, iter_max)
     % Init constants
@@ -30,7 +33,7 @@ function [idx_k, w_vector, error_vec, min_val_vec] = lms_10_gauss_newton(d_var, 
     % Declare output vectors
     error_vec   = [];
     min_val_vec = [];
-    
+
     for idx_k = 1 : s
         % Calculate estimation (a-posteriori) error
         e_i = (d_var(idx_k) - u_vec(idx_k, :) * w_vector);

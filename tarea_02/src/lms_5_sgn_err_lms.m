@@ -1,7 +1,7 @@
 % LMS_5_SGN_ERR_LMS
 %   [K, W_VEC] = lms_5_sgn_err_lms(D_VAR, U_VEC, W_INIT, MU, TOL, ITER_MAX) solves problem
 %   min_{w}E[|d-uw|^{2}]
-%   
+%
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
@@ -14,6 +14,9 @@
 %   error_vec:    approximation error
 %   min_val_vec:  approximated minimum value
 %
+% Developers:   Daniel Kohkemper, Costa Rica Institute of Technology
+%               Fabricio Quirós,  Ridgerun
+% Date:         November, 2019
 % *************************************************************************
 function [idx_k, w_vector, error_vec, min_val_vec] = lms_5_sgn_err_lms(d_var, u_vec, w_init, mu, tol, iter_max)
     % Declare output vectors

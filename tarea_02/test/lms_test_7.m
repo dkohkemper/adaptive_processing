@@ -1,5 +1,9 @@
 % *************************************************************************
 % TEST 7:
+%
+% Developers:   Daniel Kohkemper, Costa Rica Institute of Technology
+%               Fabricio Quirós,  Ridgerun
+% Date:         November, 2019
 % *************************************************************************
 clc;
 clear;
