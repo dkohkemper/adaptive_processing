@@ -1,5 +1,9 @@
 % *************************************************************************
 % TEST 4:
+%
+% Developers:   Daniel Kohkemper, Costa Rica Institute of Technology
+%               Fabricio Quirós,  Ridgerun
+% Date:         November, 2019
 % *************************************************************************
 clc;
 clear;
@@ -20,21 +24,21 @@ M_times    = 2;
 mu         = (0.05 / M_times);
 epsilon    = (0.000001 / M_times);
 beta       = 0.8;
-fprintf('  tol    = %d\n', tol);
-fprintf('iter_max = %d\n', iter_max);
-fprintf('   mu    = %d\n', mu);
-fprintf(' epsilon = %d\n', epsilon);
-fprintf('  beta   = %d\n...\n', beta);
+fprintf(' tol      = %d\n', tol);
+fprintf(' iter_max = %d\n', iter_max);
+fprintf(' mu       = %d\n', mu);
+fprintf(' epsilon  = %d\n', epsilon);
+fprintf(' beta     = %d\n...\n', beta);
 
 % Exercise 1
 [idx_k, c_vector, error_vec, min_val_vec] = ...
     lms_4_e_nlms_pow_norm(d_var, u_vec, c_init_vec, mu, epsilon, beta, tol, iter_max);
 
 % Exercise 2
-%% Subsection a
+% Subsection a
 csvwrite("results/c_estimation/test_4_c_aprox.csv", c_vector);
 
-%% Subsection b
+% Subsection b
 figure(1);
 plot((1 : idx_k), error_vec);
 xlabel("Iterarations");
@@ -51,5 +55,5 @@ print(2, "results/plots/test_4_min.pdf");
 
 fprintf('Simulation end\n');
 
-%% Subsection c
+% Subsection c
 csvwrite("results/int_c_estimation/test_4_int_c_aprox.csv", int32(c_vector));

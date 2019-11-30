@@ -1,20 +1,40 @@
 # Procesamiento Adaptativo - Tarea 2
 
-El siguiente folder del repositorio del curso contiene los resultados asociados a la implementación de diez algoritmos iterativos distintos para resolver el problema de optimatización de mínimos cuadrados (en inglés, LMS). Cada uno de estos algoritmos es utilizado para estimar los coeficientes de un canal de respuesta finita (en inglés, FIR channel), a partir de una secuencia de observaciones aleatorias relativas a dicho canal y muestras resultantes del mismo. Aquí, en este archivo, se analiza cuál de los métodos iterativos genera una mejor aproximación del vector relativo a este canal y adicionalmente, se establecen valores exactos de los coeficientes del canal FIR, asumiendo que estos son números enteros.
+El siguiente folder del repositorio del curso contiene los resultados asociados a la implementación de 
+diez algoritmos iterativos distintos para resolver el problema de optimatización de mínimos cuadrados 
+(en inglés, LMS). Cada uno de estos algoritmos es utilizado para estimar los coeficientes de un canal 
+de respuesta finita (en inglés, FIR channel), a partir de una secuencia de observaciones aleatorias 
+relativas a dicho canal y muestras resultantes del mismo. Aquí, en este archivo, se analiza cuál de 
+los métodos iterativos genera una mejor aproximación del vector relativo a este canal y adicionalmente, 
+se establecen valores exactos de los coeficientes del canal FIR, asumiendo que estos son números enteros.
 
 
 ## Pregunta 1
-Cada uno de estos algoritmos de gradiente estocásticos se encuentran desarrollados en los scripts de Matlab/Octave en la carpeta [src](src/) de este repositorio, los cuales constituyen diversas propuesta para la resolución del problema de mínimos cuadrados. Seguidamente, estos serán empleados para la estimación de un canal FIR, tomando en cuenta condiciones de parada de ejecución relativas a una tolerancia y un número máximo de iteraciones que son definidas en los archivos de prueba, descritos en la próxima sección del documento.
-
+Cada uno de estos algoritmos de gradiente estocásticos se encuentran desarrollados en los scripts de 
+Matlab/Octave en la carpeta [src](src/) de este repositorio, los cuales constituyen diversas propuesta 
+para la resolución del problema de mínimos cuadrados. Seguidamente, estos serán empleados para la estimación 
+de un canal FIR, tomando en cuenta condiciones de parada de ejecución relativas a una tolerancia y un 
+número máximo de iteraciones que son definidas en los archivos de prueba, descritos en la próxima sección 
+del documento.
 
 ## Pregunta 2
-En el folder denotado como [test](test/) se encuentra los scripts que ejecutan los diez algoritmos implementados en el primer ejercicio a manera de banco de pruebas donde se despliegan las métricas más relevantes de estas métodos de minización de cuadrados, así como las gráficas que describen el comportamiento de dichas métricas con respecto al número de iteraciones.
+En el folder denotado como [test](test/) se encuentra los scripts que ejecutan los diez algoritmos 
+implementados en el primer ejercicio a manera de banco de pruebas donde se despliegan las métricas 
+más relevantes de estas métodos de minización de cuadrados, así como las gráficas que describen el 
+comportamiento de dichas métricas con respecto al número de iteraciones.
 
 
 ### Inciso a
-Esta sección del documento muestra los coeficientes del canal de respuesta finita denominado C, calculados de forma aproximada, mediante la implementación de los diez algoritmos de gradiente estocásticos dados en la referencia, junto el valor de las constantes utilizadas para la ejecución del algoritmo, así como las condiciones de parada respectivas.
+Esta sección del documento muestra los coeficientes del canal de respuesta finita denominado C, 
+calculados de forma aproximada, mediante la implementación de los diez algoritmos de gradiente 
+estocásticos dados en la referencia, junto el valor de las constantes utilizadas para la ejecución 
+del algoritmo, así como las condiciones de parada respectivas.
 
-Cabe destacar que para el caso de las pruebas de los algoritmos **Least-mean-fourth (LMF)** y **Least-mean-mixed-norm (LMMN)** fue necesario ajustar el orden magnitud de la tolerancia dada, mediante la reducción en un factor de 4 y 2, respectivamente, tal y como se muestra a continuación, con el propósito de obtener los valores esperados, así como métricas válidas para evaluar estas implementaciones.
+Cabe destacar que para el caso de las pruebas de los algoritmos **Least-mean-fourth (LMF)** y 
+**Least-mean-mixed-norm (LMMN)** fue necesario ajustar el orden magnitud de la tolerancia dada, 
+mediante la reducción en un factor de 4 y 2, respectivamente, tal y como se muestra a continuación, 
+con el propósito de obtener los valores esperados, así como métricas válidas para evaluar estas 
+implementaciones.
 
 #### LMS con paso constante
 ```
@@ -266,10 +286,18 @@ Simulation end
 
 
 ### Inciso b
-La siguiente tabla resume los valores obtenidos de las principales métricas para cada uno de los algoritmos, sumado con las [gráficas](results/plots/) que evidencian tales resultados, los cuales permiten determinar que el método iterativo que genera una mejor aproximación del canal FIR
-corresponde al algoritmo **LMS error-signo**, puesto que el valor del k-ésimo error equivale a 0 y el valor mínimo computado es prácticamente 0 con un orden de magnitud de -14, a costa de unas 5533 iteraciones.
+La siguiente tabla resume los valores obtenidos de las principales métricas para cada uno de los 
+algoritmos, sumado con las [gráficas](results/plots/) que evidencian tales resultados, los cuales
+permiten determinar que el método iterativo que genera una mejor aproximación del canal FIR
+corresponde al algoritmo **LMS error-signo**, puesto que el valor del k-ésimo error equivale a 0 
+y el valor mínimo computado es prácticamente 0 con un orden de magnitud de -14, a costa de unas 
+5533 iteraciones.
 
-De la misma forma, el **Least-mean-fourth (LMF)** produce valores muy pequeños, pero luego de unas 75 mil iteraciones, siendo computacionalmente más costoso. Adicionalmente, cabe destacar que la implementación del **RLS** presenta un buen rendimiento computacional ya que requiere de aproxidamente 400 iteraciones, para realizar una estimación aceptable del vector C, con un k-ésimo error y un valor mínimo cuyos órdenes de magnitud equivalen a -6 y -7 respetivamente.
+De la misma forma, el **Least-mean-fourth (LMF)** produce valores muy pequeños, pero luego de unas 
+75 mil iteraciones, siendo computacionalmente más costoso. Adicionalmente, cabe destacar que la 
+implementación del **RLS** presenta un buen rendimiento computacional ya que requiere de aproxidamente 
+400 iteraciones, para realizar una estimación aceptable del vector C, con un k-ésimo error y un valor 
+mínimo cuyos órdenes de magnitud equivalen a -6 y -7 respetivamente.
 
 ##### Tabla 2.2.  Medidas asociadas a los algoritmos de gradiente estocástico.
 
@@ -288,7 +316,8 @@ De la misma forma, el **Least-mean-fourth (LMF)** produce valores muy pequeños,
 
 
 ### Inciso c
-El valor exacto del vector C conociendo que los coeficientes del canal FIR son números enteros, equivale a:
+El valor exacto del vector C conociendo que los coeficientes del canal FIR son números enteros, 
+equivale a:
 ```
      _        _
     |    10    |
@@ -304,7 +333,11 @@ C = |     3    |
 
 ```
 
-Debido a que, como fue posible observar en el inciso anterior, estos valores del vector C son números racionales, donde efecutando una aproximación entera (*Nota: aprox. de 32 bits a nivel de Matlab/Octave*) a dicho vector, es posible notar por simple inspeción que los valores son iguales para los diez algoritmos implementados en el Ejercicio 1, deduciendo así un valor exacto para el vector C.
+Debido a que, como fue posible observar en el inciso anterior, estos valores del vector C son 
+números racionales, donde efecutando una aproximación entera (*Nota: aprox. de 32 bits a nivel 
+de Matlab/Octave*) a dicho vector, es posible notar por simple inspeción que los valores son 
+iguales para los diez algoritmos implementados en el Ejercicio 1, deduciendo así un valor 
+exacto para el vector C.
 
 
 ## Referencias

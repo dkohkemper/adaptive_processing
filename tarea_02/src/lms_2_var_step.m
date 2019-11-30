@@ -1,7 +1,7 @@
-% LMS_2_VAR_STEP 
+% LMS_2_VAR_STEP
 %   [K, W_VEC] = lms_2_var_step(D_VAR, U_VEC, W_INIT, TOL, ITER_MAX) solves problem
 %   min_{w}E[|d-uw|^{2}]
-%   
+%
 %   d_var:    random variable
 %   u_vec:    random row vector size 1xn
 %   w_init:   initial w vector w^{(-1)}
@@ -13,6 +13,9 @@
 %   error_vec:    approximation error
 %   min_val_vec:  approximated minimum value
 %
+% Developers:   Daniel Kohkemper, Costa Rica Institute of Technology
+%               Fabricio Quirós,  Ridgerun
+% Date:         November, 2019
 % *************************************************************************
 function [idx_k, w_vector, error_vec, min_val_vec] = lms_2_var_step(d_var, u_vec, w_init, tol, iter_max)
     % Declare output vectors
