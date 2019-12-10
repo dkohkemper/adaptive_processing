@@ -6,7 +6,7 @@
 % C_1 ... C_L
 %
 % Developers:   Daniel Kohkemper, Costa Rica Institute of Technology
-%               Fabricio Quirós,  Ridgerun
+%               Fabricio QuirÃ³s,  Ridgerun
 % Date:         December, 2019
 % *************************************************************************
 clc;
@@ -59,7 +59,7 @@ R_sx2  = R_ss   * A2_mat';
 R_x2s  = A2_mat * R_ss;
 
 % Loop
-for k = 1 : max_iter
+for iter = 1 : max_iter
 
     % Calculate aditional covariance matrixes
     mat1 = C2_mat' * (C2_mat * R_x2x2 * C2_mat')^(-1);
@@ -70,12 +70,15 @@ for k = 1 : max_iter
 
     % Obtain eigenvalues matrix
     temp_mat = R_ve * R_ee^(-1) * R_ve';
-    [u_vec, lambda] = eig(temp_mat);
+    [u_vec, lambda] = eig(temp_mat);    % Matlab eig function usage
+%    [lambda, u_vec] = eig(temp_mat);    % Octave eig function usage
+    % Eigenvalues vector
+    eig_vec = diag(lambda);
 
     % Calculate initial values of B1, B2, C1, C2
-    C1_mat_n = u_vec(: , 1:k1)' * R_ve * R_ee^(-1);
-    C2_mat_n = u_vec(: , 1:k1)' * R_ve * R_ee^(-1);
-    B1_mat_n = u_vec(: , 1:k1);
+    C1_mat_n = u_vec(:,1:k1)' * R_ve * R_ee^(-1);
+    C2_mat_n = u_vec(:,1:k1)' * R_ve * R_ee^(-1);
+    B1_mat_n = u_vec(:,1:k1);
     B2_mat_n = (R_sx2 - B1_mat * C1_mat * R_x1x2) * mat1;
 
     % Calculate norms
@@ -88,6 +91,11 @@ for k = 1 : max_iter
     tot_error = 0.25 * (norm_B1 + norm_B2 + norm_C1 + norm_C2);
     % Generate error vector
     error_vec = [error_vec, tot_error];
+
+    % Calculate min
+    min_val = trace(R_vv) - sum(eig_vec(1:k1));
+    % Generate min vector
+    min_vec = [min_vec, min_val];
 
     % Update matrixes
     C1_mat = C1_mat_n;
@@ -110,6 +118,7 @@ for k = 1 : max_iter
 end
 
 tot_error
+min_val
 
 % Generate the following graphs
 %   error vs iterations
@@ -117,7 +126,13 @@ tot_error
 %   min vs k
 
 figure(1);
-plot(1:k, error_vec);
-xlabel("Dimension m");
+plot(1:iter, error_vec);
+xlabel("Iterations");
 ylabel("General error e_k");
-title("Test 1: Dimension m vs general error e_k")
+title("Test 1: General error e_k vs iterations")
+
+figure(2);
+plot(1:iter, min_vec);
+xlabel("Iterations");
+ylabel("Min value");
+title("Test 2: Min value vs iterations")
