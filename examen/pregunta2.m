@@ -9,18 +9,6 @@
 %               Fabricio Quirós,  Ridgerun
 % Date:         December, 2019
 % *************************************************************************
-
-% Make s random vector of dimension 30 and exponential covariance matrix ro = 0.4, sigma = 2
-
-% x_j = A_j s_j + v_j, for j = 1,2 where
-%   A_1 and A_2 are tridiagonal matrices 30x30, entries different than cero come from randn
-%   v_1 and v_2 are random vectors of dimension 30, whose covariance matrices are 
-%   R_v1v1 = 0.25 I_30 and R_v2v2 = 0.75 I_30.
-%   s, v_1, v_2, are orthogonal between each other
-%
-%   Initial matrices B_1, B_2, C_1, C_2, are randomly generated between ]0,1[ using randn
-%
-%   Tolerance is epsilon = 10^-4 and max_iter = 1000
 clc;
 clear;
 fclose("all");
@@ -30,8 +18,9 @@ sigma    = 2;
 dim      = 30;
 tol      = 10^-4;
 max_iter = 1000;
-k1       = 15;
-k2       = 15;
+k        = 15;
+k1       = k;
+k2       = k;
 
 % Generate s matrix
 s_mat = rand(dim, dim);
@@ -46,9 +35,9 @@ v2_mat = rand(dim, 1);
 R_v1v1 = 0.25 * eye(dim);
 R_v2v2 = 0.75 * eye(dim);
 
-% Generate A1 and A2 % TODO: Cambiar esto a valores diferentes
-A1_mat = full(gallery('tridiag', dim, randn, randn, randn));
-A2_mat = full(gallery('tridiag', dim, randn, randn, randn));
+% Generate A1 and A2
+A1_mat = triadiag_mat(dim);
+A2_mat = triadiag_mat(dim);
 
 % Generate random C_i and B_i initial matrixes
 B1_mat = rand(dim, k1);
@@ -107,10 +96,10 @@ for k = 1 : max_iter
     B2_mat = B2_mat_n;
 
     % Update covariance matrixes
-    R_x1x1 = A1_mat * R_ss * transpose(A1_mat) + R_v1v1;
-    R_x2x2 = A2_mat * R_ss * transpose(A2_mat) + R_v2v2;
-    R_x1x2 = A1_mat * R_ss * transpose(A2_mat);
-    R_x2x1 = A2_mat * R_ss * transpose(A1_mat);
+    R_x1x1 = A1_mat * R_ss * A1_mat' + R_v1v1;
+    R_x2x2 = A2_mat * R_ss * A2_mat' + R_v2v2;
+    R_x1x2 = A1_mat * R_ss * A2_mat';
+    R_x2x1 = A2_mat * R_ss * A1_mat';
     R_sx1  = R_ss   * A1_mat';
     R_sx2  = R_ss   * A2_mat';
     R_x2s  = A2_mat * R_ss;
