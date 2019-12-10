@@ -20,7 +20,7 @@ tol      = 10^-4;
 max_iter = 1000;
 k        = 15;
 k1       = k;
-k2       = k;
+k2       = k1;
 
 % Generate s matrix
 s_mat = rand(dim, dim);
@@ -120,10 +120,9 @@ end
 tot_error
 min_val
 
-% Generate the following graphs
+% Generate the following plots
 %   error vs iterations
 %   min vs iterations
-%   min vs k
 
 figure(1);
 plot(1:iter, error_vec);
