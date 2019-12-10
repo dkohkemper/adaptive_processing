@@ -34,7 +34,7 @@ max_iter = 1000;
 % Generate s matrix
 s_mat = rand(dim, dim);
 % Generate s exponential covariance matrix
-s_cov_mat = exp_cov_mat(ro, sigma, dim);
+R_ss = exp_cov_mat(ro, sigma, dim);
 
 % Generate v1 and v1 random vectors
 v1_mat = rand(dim, 1);
@@ -53,6 +53,32 @@ B1_mat = rand(dim, dim);
 B2_mat = rand(dim, dim);
 C1_mat = rand(dim, dim);
 C2_mat = rand(dim, dim);
+
+% Iteraciones
+error_vec =[];
+min_vec   =[];
+
+% Initialize the covariance matrixes
+R_x1x1 = A1_mat * R_ss * transpose(A1_mat) + R_v1v1;
+R_x2x2 = A2_mat * R_ss * transpose(A2_mat) + R_v2v2;
+R_x1x2 = A1_mat * R_ss * transpose(A2_mat);
+R_x2x1 = A2_mat * R_ss * transpose(A1_mat);
+R_sx1  = R_ss * transpose(A1_mat);
+R_sx2  = R_ss * transpose(A2_mat);
+R_x2s  = A2_mat * R_ss;
+
+% Calculate aditional covariance matrixes
+R_ee = R_x1x1 - R_x1x2 * transpose(C2_mat) * inv((C2_mat * R_x2x2 * transpose(C2_mat))) * C2_mat * R_x2x1;
+R_vv = R_ss - R_sx2 * transpose(C2_mat) * inv((C2_mat * R_x2x2 * transpose(C2_mat))) * C2_mat * R_x2s;
+R_ve = R_sx1 - R_sx2 * transpose(C2_mat) * inv((C2_mat * R_x2x2 * transpose(C2_mat))) * C2_mat * R_x2x1;
+
+for k = 1 : max_iter
+
+
+    if tot_error < tol
+        break
+    end
+end
 
 % Generate the following graphs
 %   error vs iterations
